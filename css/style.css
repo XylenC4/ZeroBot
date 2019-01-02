@@ -1,0 +1,144 @@
+* {
+  -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+  /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+  -webkit-tap-highlight-color: rgba(0,0,0,0); 
+  -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+  -webkit-tap-highlight-color: rgba(0,0,0,0); 
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+body {
+  background-color: #000000;
+  margin: 0px;
+}
+canvas {
+  display:block; 
+  position:absolute; 
+}
+.container {
+  width:auto;
+  text-align:center;
+  background-color:#ff0000;
+}
+
+.fill {
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-image: url('path/to/image.jpg');
+}
+
+/*Idea and controls to node.js taken from "ZeroBotPro", see
+https://github.com/CoretechR/ZeroBot 
+Headlight toggle switch (source: http://callmenick.com/post/css-toggle-switch-examples) */
+.cmn-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+.cmn-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+input.cmn-toggle-round-flat + label {
+  background-color: transparent;
+  border-radius: 10%;
+  border: 2px;
+  border-style: solid;
+  border-color: white;
+  text-align:center;
+    
+  padding-top: 20%;
+    padding-bottom: 20%;
+    font-size: 16px;
+  margin: 40% 7% 10%;
+  cursor: pointer;
+  transition: background 0.4s;
+}
+input.cmn-toggle-round-flat:checked + label {
+  background-color: gray;
+}
+.cam_button {
+  background-color: transparent;
+  border-radius: 100%;
+  border: 7px;
+  border-style: solid;
+  border-color: white;
+  text-align:center;
+  
+  padding-top: 40%;
+    padding-bottom: 40%;
+    padding-left: 40%;
+    padding-right: 40%;
+  font-size: 16px;
+  margin: 50% 3% 4% 4%;
+  cursor: pointer;
+}
+
+.cam_button:active {
+  background-color: gray;
+}
+  
+  .off_button {
+    background-color: transparent;
+  border-radius: 10%;
+  border: 2px;
+  border-style: solid;
+  border-color: white;
+  text-align:center;
+  
+    padding-top: 20%;
+    padding-bottom: 20%;
+    font-size: 100%;
+    margin: 10% 7%;
+  cursor: pointer;
+}
+  .off_button:active {
+  background-color: gray;
+}
+  
+  .light_button {
+  background-color: transparent;
+  border-radius: 10%;
+  border: 2px;
+  border-style: solid;
+  border-color: white;
+  text-align:center;
+    
+  padding-top: 20%;
+    padding-bottom: 20%;
+    font-size: 16px;
+  margin: 40% 7% 10%;
+  cursor: pointer;
+}
+.light_button:checked {
+  background-color: #b1b;
+}
+  
+.sidenav {
+  color: #fff;
+  height: 100%;
+  width: 13%;
+  position: fixed;
+  z-index: 0;
+  top: 0px;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+#BottomMotorCompensationSlider {
+    position:absolute;
+    width:60%;
+    height:25px;
+    bottom:0px;
+    right:25%;
+    left:50%;
+    margin-left:-30%;
+}
