@@ -49,7 +49,21 @@ sudo sed -i -e 's/# rotation = 0/rotation = 180/g' /etc/uv4l/uv4l-raspicam.conf
 sudo service uv4l_raspicam restart
 ```
 
-
-## Install this repository
-git clone https://github.com/CoretechR/ZeroBot ZeroBot
+## Install this repository & dependencies:
+```bash
+git clone https://github.com/XylenC4/ZeroBot.git ZeroBot
 cd ZeroBot
+npm install express
+npm install socket.io
+npm install pigpio
+npm install node-ads1x15
+```
+
+## Add automatic startup:
+```bash
+echo 'cd /home/pi/ZeroBot' | sudo tee -a /etc/rc.local
+echo 'sudo node app.js&' | sudo tee -a /etc/rc.local
+echo 'cd' | sudo tee -a /etc/rc.local
+```
+
+
