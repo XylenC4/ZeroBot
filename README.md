@@ -1,5 +1,15 @@
 # ZeroBot
-Raspberry Pi Zero FPV Robot with uv4l and mobile support
+Raspberry Pi Zero FPV Robot with uv4l and mobile support.
+
+In difference to the original project:
+	- Code has cleaned up (a bit)
+	- Video is based on uv4l
+	- Touch support is based on the project PEP
+	- Slider on the bottom to correct if the motors are not equal to drive straight
+	- Apache is not used (script works on port 80)
+
+Original project: https://github.com/CoretechR/ZeroBot
+Mobile support is based on PEP: https://github.com/jquery/PEP
 
 # Usage
 
@@ -33,20 +43,20 @@ echo 'deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/stretch stret
 sudo apt update -y
 sudo apt upgrade -y
 sudo rpi-update -y
-sudo apt install apache2 nodejs npm git pigpio -y
+sudo apt install nodejs npm git pigpio -y
 sudo apt-get install uv4l uv4l-webrtc uv4l-raspicam-extras -y
 ```
 
 ## UV4L Set-Up
 - Set-Up the resolution:
 ```bash
+sudo sed -i -e 's/# server-option = --port=8080/server-option = --port=9000/g' /etc/uv4l/uv4l-raspicam.conf
 sudo sed -i -e 's/# width = /width = /g' /etc/uv4l/uv4l-raspicam.conf
 sudo sed -i -e 's/# height = /height = /g' /etc/uv4l/uv4l-raspicam.conf
 sudo sed -i -e 's/framerate = 30/framerate = 15/g' /etc/uv4l/uv4l-raspicam.conf
 sudo sed -i -e 's/# quality =/quality =/g' /etc/uv4l/uv4l-raspicam.conf
 sudo sed -i -e 's/# stills-denoise/stills-denoise/g' /etc/uv4l/uv4l-raspicam.conf
 sudo sed -i -e 's/# rotation = 0/rotation = 180/g' /etc/uv4l/uv4l-raspicam.conf
-sudo service uv4l_raspicam restart
 ```
 
 ## Install this repository & dependencies
@@ -72,7 +82,7 @@ echo 'exit 0' | sudo tee -a /etc/rc.local
 ## Test (without restart)
 ```bash
 sudo service uv4l_raspicam restart
-sudo /etc/init.d/apache2 restart
 sudo node app.js
 ```
+Connect to your raspberry pi using the webbrowser of your choice (Port:80)
 
