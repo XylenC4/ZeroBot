@@ -67,3 +67,10 @@ echo 'cd' | sudo tee -a /etc/rc.local
 ```
 
 
+## Test (without restart)
+```bash
+sudo service uv4l_raspicam restart
+sudo /etc/init.d/apache2 restart
+sudo node app.js
+```
+
