@@ -17,9 +17,9 @@ network={
 }
 ```
 - Generate a new Text-File called "SSH" on the "boot" partition
+- Put the SD-Card into the Raspberry Pi & boot it up.
 
-
-## Raspbian Set-Up
+## Raspbian enable Camera & i2c
 - Connect to the Raspberry Pi via SSH
 - Enable the Camera and i2c using:
 ```bash
@@ -49,7 +49,7 @@ sudo sed -i -e 's/# rotation = 0/rotation = 180/g' /etc/uv4l/uv4l-raspicam.conf
 sudo service uv4l_raspicam restart
 ```
 
-## Install this repository & dependencies:
+## Install this repository & dependencies
 ```bash
 git clone https://github.com/XylenC4/ZeroBot.git ZeroBot
 cd ZeroBot
@@ -59,7 +59,7 @@ npm install pigpio
 npm install node-ads1x15
 ```
 
-## Add automatic startup:
+## Add automatic startup
 ```bash
 echo 'cd /home/pi/ZeroBot' | sudo tee -a /etc/rc.local
 echo 'sudo node app.js&' | sudo tee -a /etc/rc.local
