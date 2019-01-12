@@ -52,6 +52,7 @@ sudo sed -i -e 's/framerate = 30/framerate = 15/g' /etc/uv4l/uv4l-raspicam.conf
 sudo sed -i -e 's/# quality =/quality =/g' /etc/uv4l/uv4l-raspicam.conf
 sudo sed -i -e 's/# stills-denoise/stills-denoise/g' /etc/uv4l/uv4l-raspicam.conf
 sudo sed -i -e 's/# rotation = 0/rotation = 180/g' /etc/uv4l/uv4l-raspicam.conf
+sudo service uv4l_raspicam restart
 ```
 
 ## Install this repository & dependencies
