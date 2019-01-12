@@ -5,7 +5,9 @@ Raspberry Pi Zero FPV Robot with uv4l and mobile support
 
 ## Raspbian
 Download Raspbian lite
+
 Put Raspbian on a SD-Card
+
 Generate a new Text-File called "wpa_supplicant.conf"
 
 Put in there: (With your network informations)
