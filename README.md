@@ -2,14 +2,11 @@
 Raspberry Pi Zero FPV Robot with uv4l and mobile support.
 
 In difference to the [original project](https://github.com/CoretechR/ZeroBot):
-	- Code has cleaned up (a bit)
-	- Video is based on uv4l
-	- Touch support is based on the project PEP
-	- Slider on the bottom to correct if the motors are not equal to drive straight
-	- Apache is not used (script works on port 80)
-
-Original project: https://github.com/CoretechR/ZeroBot
-Mobile support is based on PEP: https://github.com/jquery/PEP
+- Code has cleaned up (a bit)
+- Video is based on [uv4l](https://www.linux-projects.org/uv4l/)
+- Touch support is based on the project [PEP](https://github.com/jquery/PEP)
+- Slider on the bottom to correct if the motors are not equal to drive straight
+- Apache is not used (script works on port 80)
 
 # Usage
 ## Raspbian
