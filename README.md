@@ -1,7 +1,7 @@
 # ZeroBot
 Raspberry Pi Zero FPV Robot with uv4l and mobile support.
 
-In difference to the original project:
+In difference to the [original project](https://github.com/CoretechR/ZeroBot):
 	- Code has cleaned up (a bit)
 	- Video is based on uv4l
 	- Touch support is based on the project PEP
@@ -12,7 +12,6 @@ Original project: https://github.com/CoretechR/ZeroBot
 Mobile support is based on PEP: https://github.com/jquery/PEP
 
 # Usage
-
 ## Raspbian
 - Download Raspbian lite
 - Put Raspbian on a SD-Card
@@ -48,7 +47,6 @@ sudo apt-get install uv4l uv4l-webrtc uv4l-raspicam-extras -y
 ```
 
 ## UV4L Set-Up
-- Set-Up the resolution:
 ```bash
 sudo sed -i -e 's/# server-option = --port=8080/server-option = --port=9000/g' /etc/uv4l/uv4l-raspicam.conf
 sudo sed -i -e 's/# width = /width = /g' /etc/uv4l/uv4l-raspicam.conf
@@ -77,12 +75,9 @@ echo 'sudo node app.js&' | sudo tee -a /etc/rc.local
 echo 'cd' | sudo tee -a /etc/rc.local
 echo 'exit 0' | sudo tee -a /etc/rc.local
 ```
-
-
 ## Test (without restart)
 ```bash
 sudo service uv4l_raspicam restart
 sudo node app.js
 ```
 Connect to your raspberry pi using the webbrowser of your choice (Port:80)
-
