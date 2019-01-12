@@ -61,9 +61,11 @@ npm install node-ads1x15
 
 ## Add automatic startup
 ```bash
+sudo sed -i '$d' /etc/rc.local
 echo 'cd /home/pi/ZeroBot' | sudo tee -a /etc/rc.local
 echo 'sudo node app.js&' | sudo tee -a /etc/rc.local
 echo 'cd' | sudo tee -a /etc/rc.local
+echo 'exit 0' | sudo tee -a /etc/rc.local
 ```
 
 
