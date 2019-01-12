@@ -36,3 +36,20 @@ sudo rpi-update -y
 sudo apt install apache2 nodejs npm git pigpio -y
 sudo apt-get install uv4l uv4l-webrtc uv4l-raspicam-extras -y
 ```
+
+## UV4L Set-Up
+- Set-Up the resolution:
+```bash
+sudo sed -i -e 's/# width = /width = /g' /etc/uv4l/uv4l-raspicam.conf
+sudo sed -i -e 's/# height = /height = /g' /etc/uv4l/uv4l-raspicam.conf
+sudo sed -i -e 's/framerate = 30/framerate = 15/g' /etc/uv4l/uv4l-raspicam.conf
+sudo sed -i -e 's/# quality =/quality =/g' /etc/uv4l/uv4l-raspicam.conf
+sudo sed -i -e 's/# stills-denoise/stills-denoise/g' /etc/uv4l/uv4l-raspicam.conf
+sudo sed -i -e 's/# rotation = 0/rotation = 180/g' /etc/uv4l/uv4l-raspicam.conf
+sudo service uv4l_raspicam restart
+```
+
+
+## Install this repository
+git clone https://github.com/CoretechR/ZeroBot ZeroBot
+cd ZeroBot
