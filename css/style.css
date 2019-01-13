@@ -29,6 +29,11 @@ canvas {
     background-position: center;
     background-image: url('path/to/image.jpg');
 }
+.cover {
+  object-fit: cover;
+  width: 50px;
+  height: 100px;
+}
 
 /*Idea and controls to node.js taken from "ZeroBotPro", see
 https://github.com/CoretechR/ZeroBot 
