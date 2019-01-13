@@ -14,17 +14,17 @@ https://github.com/CoretechR/ZeroBot
   <head>
     <meta charset=utf-8>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" /> 
-    <title>ZeroBot</title>
+    <title>ZeroBot Xylen.C4 mod</title>
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/slider.css">
   </head>
   <ul id="messages"></ul>
   <script src="/socket.io/socket.io.js"></script>
   <body onload = "init()" scroll="no" style="overflow: hidden">
-    <script src="js/pep.js"></script>
-    <script src="/js/Vector2.js"></script>
-    <script src="/js/touch.js"></script>
-    <div><p id="stream"></p></div> 
+  <script src="js/pep.js"></script>
+  <script src="/js/Vector2.js"></script>
+  <script src="/js/touch.js"></script>
+  <p id="stream" class="cover"/>
   <script src="/js/controls.js"></script>
 	
   <div class="sidenav" style="left:0;z-index: 2;">
@@ -33,17 +33,17 @@ https://github.com/CoretechR/ZeroBot
   </div>
   <div class="sidenav" style="right:0;z-index: 2;">
     <center class="off_button" type="button" onclick="shutdown()">OFF</center>
-    <center class="cam_button" type="button" onclick="takePicture()"></center>
-     <div>
-       <div class="switch">
-           <input id="cmn-toggle"css class="cmn-toggle cmn-toggle-round-flat" type="checkbox" onclick="handleHeadlightClick(this)">
-           <label for="cmn-toggle">LIGHT</label>
-       </div>
-     </div>
-   </div>
-   <div style="position:fixed;bottom:40vh;right:0;padding:25px"></div>
+     <center class="cam_button" type="button" onclick="takePicture()"></center>
+      <div>
+        <div class="switch">
+            <input id="cmn-toggle"css class="cmn-toggle cmn-toggle-round-flat" type="checkbox" onclick="handleHeadlightClick(this)">
+            <label for="cmn-toggle">LIGHT</label>
+        </div>
+      </div>
+    </div>
+    <!-- <div style="position:fixed;bottom:40vh;right:0;padding:25px"></div> -->
 	<div id="BottomMotorCompensationSlider">
-		<input id="slider" class="range-slider__range" type="range" min="-100" max="100" step="5" value="40" onchange="updateSlider(this.value)"/>
-   </div>
+	 <input id="slider" class="range-slider__range" type="range" min="-100" max="100" step="5" value="40" onchange="updateSlider(this.value)"/>
+   <!-- </div> -->
   </body>
 </html>

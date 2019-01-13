@@ -5,11 +5,12 @@ app.use('/css', express.static(__dirname + '/css')); //  "css" off of current is
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var exec = require('child_process').exec, child;
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 80;
 var ads1x15 = require('node-ads1x15');
 var adc = new ads1x15(1); // set to 0 for ads1015
- var fs = require('fs');
-var fileMotorCompensation = "config/MotorCompensation.cfg"
+var fs = require('fs');
+var fileMotorCompensation = "config/MotorCompensation.cfg";
+var slider = 0;
 
 var Gpio = require('pigpio').Gpio,
   A1 = new Gpio(27, {mode: Gpio.OUTPUT}),
@@ -28,11 +29,15 @@ child = exec("sudo bash start_stream.sh", function(error, stdout, stderr){});
 //Whenever someone connects this gets executed
   io.on('connection', function(socket){
   console.log('A user connected');
-  
+  SystemInfo();
+  setInterval(SystemInfo,10*1000);
   if (fs.existsSync(fileMotorCompensation)) {  
     try {  
       var data = fs.readFileSync(fileMotorCompensation, 'utf8');
         console.log('Initialisate slider:', data.toString());
+		
+	    slider = parseInt(data);
+        console.log('Slider Value:', slider);
         io.emit('slider', data.toString());
 	  
         console.log(data.toString()); 	  
@@ -43,9 +48,7 @@ child = exec("sudo bash start_stream.sh", function(error, stdout, stderr){});
 	else {
       console.log('File does not exist:', fileMotorCompensation);
   }
-	
-
-  
+	 
   socket.on('pos', function (msx, msy) {
     //console.log('X:' + msx + ' Y: ' + msy);
     //io.emit('posBack', msx, msy);
@@ -69,7 +72,17 @@ child = exec("sudo bash start_stream.sh", function(error, stdout, stderr){});
     msx = Math.min(Math.max(parseInt(msx), -255), 255);
     msy = Math.min(Math.max(parseInt(msy), -255), 255);
 	
-
+	// console.log('X:' + msx + ' Y: ' + msy);
+	if(slider>0) {
+		// console.log('Slider:' + (1-(Math.abs(slider)/100)));
+		msy = Math.round(msy * (1-(Math.abs(slider)/100)));
+	}
+	
+	if(slider<0) {
+		// console.log('Slider:' + (1-(Math.abs(slider)/100)));
+		msx = Math.round(msx * (1-(Math.abs(slider)/100)));
+	}
+	// console.log('X:' + msx + ' Y: ' + msy);
 	
     if(msx > 0){
       A1.pwmWrite(msx);
@@ -86,7 +99,6 @@ child = exec("sudo bash start_stream.sh", function(error, stdout, stderr){});
       B1.pwmWrite(0);
       B2.pwmWrite(Math.abs(msy));
     }
-
 
   }); 
   
@@ -117,11 +129,11 @@ child = exec("sudo bash start_stream.sh", function(error, stdout, stderr){});
   socket.on('disconnect', function () {
     console.log('A user disconnected');
   });
-  
-  
+   
   socket.on('slider', function(value) {
     console.log("Slider value:", value);
-	
+	slider = parseInt(value);
+    console.log('Slider Value:', slider);
 	fs.writeFile(fileMotorCompensation, value, function (err) {
 	if (err) {
 		console.log("Eerror while saving:", fileMotorCompensation);
@@ -129,32 +141,30 @@ child = exec("sudo bash start_stream.sh", function(error, stdout, stderr){});
 		console.log("Saving success:", fileMotorCompensation);
 	}
 	})
-
   });
-  
-  setInterval(function(){ // send temperature every 5 sec
-    child = exec("cat /sys/class/thermal/thermal_zone0/temp", function(error, stdout, stderr){
-      if(error !== null){
-         console.log('exec error: ' + error);
-      } else {
-         var temp = parseFloat(stdout)/1000;
-         io.emit('temp', temp);
-         console.log('temp', temp);
-      }
-    });
-    if(!adc.busy){
-      adc.readADCSingleEnded(0, '4096', '250', function(err, data){ //channel, gain, samples
-        if(!err){          
-          voltage = 2*parseFloat(data)/1000;
-          console.log("ADC: ", voltage);
-          io.emit('volt', voltage);
-        }
-      });
-    }
-  }, 5000);
-
 });
 
 http.listen(port, function(){
   console.log('listening on *:' + port);
 });
+
+function SystemInfo() {
+	child = exec("cat /sys/class/thermal/thermal_zone0/temp", function(error, stdout, stderr){
+    if(error !== null){
+        console.log('exec error: ' + error);
+    } else {
+        var temp = parseFloat(stdout)/1000;
+        io.emit('temp', temp);
+        console.log('temp', temp);
+    }
+    });
+    if(!adc.busy){
+        adc.readADCSingleEnded(0, '4096', '250', function(err, data){ //channel, gain, samples
+        if(!err){          
+			voltage = 2*parseFloat(data)/1000;
+			console.log("ADC: ", voltage);
+			io.emit('volt', voltage);
+        }
+      });
+    }
+}
