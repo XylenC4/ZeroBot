@@ -10,7 +10,8 @@ In difference to the [original project](https://github.com/CoretechR/ZeroBot):
 
 # Usage
 ## Raspbian
-- Download Raspbian lite
+- Download [Raspbian Stretch lite](https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2019-04-09/)
+-> node-ads1x15 doesn't work with Raspbian Buster
 - Put Raspbian on a SD-Card
 - Generate a new Text-File called "wpa_supplicant.conf" on the "boot" partition
 - Put in there: (With your network informations)
@@ -63,6 +64,8 @@ npm install express
 npm install socket.io
 npm install pigpio
 npm install node-ads1x15
+npm install ina226
+npm install npm install bme280
 ```
 
 ## Add automatic startup
